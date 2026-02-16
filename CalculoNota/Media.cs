@@ -19,25 +19,30 @@ namespace CalculoNota
         {
             Console.Clear();
             Console.WriteLine("Gostaria de calcular a media de quantos alunos?");
-            int qtd = int.Parse(Console.ReadLine()!);
-            
-            var alunos = new List<(string Nome, float Media, bool Situacao)>();
+            int qtdAlunos = int.Parse(Console.ReadLine()!);
+            Console.WriteLine("Gostaria de calcular a media de quantas provas?");
+            int qtdNotas= int.Parse(Console.ReadLine()!);
 
-            for (int i = 0; i < qtd; i++)
-            { 
+            var alunos = new List<(string Nome, float Media, bool Situacao)>();
+            var notas = new List<float>();
+
+            for (int i = 0; i < qtdAlunos; i++)
+            {
                 Console.WriteLine("Digite o nome do aluno: ");
                 string nome = Console.ReadLine()!;
-                Console.WriteLine("Digite a primeira nota: ");
-                float nota1 = float.Parse(Console.ReadLine()!);
-                Console.WriteLine("Digite a segunda nota: ");
-                float nota2 = float.Parse(Console.ReadLine()!);
-                Console.WriteLine("Digite a terceira nota: ");
-                float nota3 = float.Parse(Console.ReadLine()!);
+                for (int y = 0; y < qtdNotas; y++)
+                {
+                    var x = y + 1;
+                    Console.WriteLine($"Digite a {x}º nota do aluno: ");
+                    float nota = float.Parse(Console.ReadLine()!);
+                    notas.Add(nota);
+                }
+
                 Console.WriteLine("Calculando...");
                 Thread.Sleep(2500);
                 Console.Clear();
 
-                float media = (nota1 + nota2 + nota3) / 3;
+                float media = notas.Sum() / notas.Count();
                 bool situacao = media >= 7.0;
                 alunos.Add((nome, media, situacao));
             }
